@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import './styles/styles.scss';
 import 'normalize.css/normalize.css';
 
@@ -30,19 +30,32 @@ const HelpPage = () => (
 
 const NotFoundPage = () => (
   <div>
-    404!
+    404 - <Link to="/">Go home</Link>
   </div>
+);
+
+const Header = () => (
+  <header>
+    <h1>Expensify</h1>
+    <NavLink exact to="/" activeClassName="is-active">Dashboard</NavLink>
+    <NavLink to="/create" activeClassName="is-active">create</NavLink>
+    <NavLink to="/edit" activeClassName="is-active">Edit</NavLink>
+    <NavLink to="help" activeClassName="is-active">Help</NavLink>
+  </header>
 );
 
 const routes = (
   <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={ExpenseDashboardpage} />
-      <Route path="/create" component={AddExpensePage} />
-      <Route path="/edit" component={EditExpensePage} />
-      <Route path="/help" component={HelpPage} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={ExpenseDashboardpage} />
+        <Route path="/create" component={AddExpensePage} />
+        <Route path="/edit" component={EditExpensePage} />
+        <Route path="/help" component={HelpPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </div>
   </BrowserRouter>
 );
 
